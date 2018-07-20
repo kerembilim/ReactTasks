@@ -24,6 +24,5 @@ class ShowComment extends Component {
             </div>
         )
     }
-
 }
 export default ShowComment;
