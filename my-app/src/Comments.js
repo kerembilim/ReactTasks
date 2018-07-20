@@ -9,31 +9,23 @@ class Comments extends Component {
             comments: []
         };
     }
-
     componentDidMount() {
         axios.get('https://jsonplaceholder.typicode.com/comments')
             .then(response=> this.setState({comments: response.data}));
     }
-
     render() {
         return (
             <div>
                 {this.state.comments.map(comment => comment.postId === this.props.postId ?
-
-                    <div>
+                    <div key={comment.id}>
                         <p><b>Name : </b>{comment.name}</p>
                         <p><b>Email : </b>{comment.email}</p>
                         <p><b>Body : </b>{comment.body}</p>
                         <hr/>
-
                     </div>
-
-
                     : null
                 )
-
                 }
-
             </div>
         )
     }
