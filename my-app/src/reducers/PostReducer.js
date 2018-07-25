@@ -6,3 +6,11 @@ export const postReducer = (state = {posts: []}, action) => {
             return state;
     }
 };
+export const postUserReducer = (state = {users: []}, action) => {
+    switch(action.type) {
+        case 'SET_POST_USER_ACTION':
+            return action;
+        default:
+            return state;
+    }
+};

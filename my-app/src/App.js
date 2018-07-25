@@ -9,10 +9,11 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {combineReducers, createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
-import {postReducer} from "./reducers/PostReducer";
+import {postReducer, postUserReducer} from "./reducers/PostReducer";
 
 const reducers = combineReducers({
-    posts: postReducer
+    posts: postReducer,
+    users: postUserReducer
 });
 
 const store = createStore(reducers, {}, composeWithDevTools(applyMiddleware(thunk)));
