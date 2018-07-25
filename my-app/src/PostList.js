@@ -3,7 +3,6 @@ import {Link} from "react-router-dom"
 import {bindActionCreators} from "redux";
 import {postAction,postUserAction} from "./actions/PostAction";
 import {connect} from "react-redux";
-
 class PostList extends Component {
     componentDidMount(){
         const {postAction} = this.props;
@@ -11,7 +10,6 @@ class PostList extends Component {
         postAction();
         postUserAction();
     }
-
     render() {
         const { posts } = this.props;
         const {users}   =this.props;
