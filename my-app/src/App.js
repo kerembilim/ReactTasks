@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-
 import PostList from "./PostList";
 import PostDetail from "./PostDetail";
-
 import {composeWithDevTools} from 'redux-devtools-extension';
 import {combineReducers, createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {postReducer, postUserReducer} from "./reducers/PostReducer";
-import {commentReducer} from "./reducers/CommentReducer";
+import {commentReducer,showReplyReducer} from "./reducers/CommentReducer";
 
 const reducers = combineReducers({
     posts: postReducer,
     comments:commentReducer,
+    showReply:showReplyReducer,
     users: postUserReducer
 });
 const store = createStore(reducers, {}, composeWithDevTools(applyMiddleware(thunk)));

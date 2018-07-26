@@ -1,17 +1,11 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from "redux";
-import {commentAction} from "./actions/CommentAction";
+import {commentAction,showReplyAction} from "./actions/CommentAction";
 import {connect} from "react-redux";
 class ShowComment extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showReply: false
-        };
-    }
     onClick(e) {
-        e.preventDefault();
-        this.setState((state) => ({showReply: !state.showReply}));
+        const {showReplyAction} = this.props;
+        showReplyAction();
     }
     componentDidMount() {
         const {commentAction}=this.props;
@@ -19,11 +13,12 @@ class ShowComment extends Component {
     }
     render() {
         const { comments } = this.props;
+        const { showReply} = this.props;
         return (
             <div>
-                {this.state.showReply===false ? <div><button style={{borderRadius:20}} onClick={this.onClick.bind(this)}>Show Comments</button></div>
+                {showReply===false ? <div><button style={{borderRadius:20}} onClick={this.onClick.bind(this)}>Show Comments</button></div>
                     :<div><button style={{borderRadius:20}} onClick={this.onClick.bind(this)}>Hide Comments</button></div>}
-                {this.state.showReply && comments.map(comment => comment.postId === this.props.postId ?
+                {showReply && comments.map(comment => comment.postId === this.props.postId ?
                     <div key={comment.id}>
                         <p><b>Name : </b>{comment.name}</p>
                         <p><b>Email : </b>{comment.email}</p>
@@ -38,10 +33,11 @@ class ShowComment extends Component {
 }
 let storeToProps = (store) => {
     return {
-        comments: store.comments.comments
+        comments: store.comments.comments,
+        showReply:store.showReply.showReply
     };
 };
 const dispatchToProps = (dispatch) => {
-    return bindActionCreators({commentAction: commentAction}, dispatch);
+    return bindActionCreators({commentAction: commentAction,showReplyAction:showReplyAction}, dispatch);
 };
 export default connect(storeToProps, dispatchToProps)(ShowComment);
